@@ -1,2 +1,3 @@
 # To-do
-With database
+
+A simple To-do app with database
