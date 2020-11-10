@@ -16,12 +16,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do</title>
     <link rel="stylesheet" href="../bootstrap-4.5.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="card mt-5">
             <div class="card-body">
-                <a href="create.html" class="btn btn-success">Add</a>
+                <a href="create.html" class="btn btn-success sign">+</a>
                 <table class="table mt-3">
                     <thead>
                         <tr>
@@ -33,19 +34,20 @@
                     </thead>
     
                     <tbody>
+                    <?php if($datum):?>
+                    <?php foreach ($datum as $data) : ?>
                         <tr>
-                            <?php foreach ($datum as $data) : ?>
-                                <td><?php echo $data->id ?></td>
-                                <td><?php echo $data->title ?></td>
-                                <td><?php echo $data->description ?></td>
-                                <td><?php echo $data->create_at ?></td>
-                            <?php endforeach ?>
-
+                            <td><?php echo $data->id ?></td>
+                            <td><?php echo $data->title ?></td>
+                            <td><?php echo $data->description ?></td>
+                            <td><?php echo date("Y-m-d", strtotime($data->create_at)) ?></td>
                             <td>
-                                <a href="edit.php" class="btn btn-outline-primary">Edit</a>
-                                <a href="#" class="btn btn-outline-danger">Delete</a>
+                                <a href="edit.php?id=<?php echo $data->id ?>" class="btn btn-outline-primary">Edit</a>
+                                <a href="delete.php?id=<?php echo $data->id ?>" class="btn btn-outline-danger">Delete</a>
                             </td>
                         </tr>
+                    <?php endforeach ?>
+                    <?php endif ?>
                     </tbody>
                 </table>
             </div>

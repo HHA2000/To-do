@@ -1,3 +1,17 @@
+<?php
+    require_once "config.php";
+
+    $id = $_GET["id"];
+
+    $statement = $pdo->prepare("SELECT * FROM todo WHERE id = :id");
+    $statement->bindParam(":id", $id);
+
+    if ($statement->execute()) {
+        $result = $statement->fetch(PDO::FETCH_OBJ);
+        
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +23,22 @@
 <body>
     <div class="container mt-5">
         <h1>Update</h1>
-        <form action="" method="post" class="mt-3">
+        <form action="update.php" method="post" class="mt-3">
+            <?php if ($result): ?>
+            <input hidden name="id" value="<?php echo $result->id ?>">
             <div class="form-group">
-              <input type="text" class="form-control" name="title" placeholder="Title">
+              <input type="text" class="form-control" name="title" placeholder="Title" value="<?php echo $result->title  ?>">
             </div>
 
             <div class="form-group">
-                <textarea class="form-control" rows="5" name="description" placeholder="Description"></textarea>
-            </div>
+                <textarea class="form-control" rows="5" name="description" placeholder="Description"><?php echo $result->description ?></textarea>
+            </div> 
 
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Update">
                 <a href="index.php" class="btn btn-warning">Back</a>
             </div>
+            <?php endif ?>
         </form>
     </div>
 </body>
