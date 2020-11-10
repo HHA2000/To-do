@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Update">
-                <a href="index.html" class="btn btn-warning">Back</a>
+                <a href="index.php" class="btn btn-warning">Back</a>
             </div>
         </form>
     </div>
