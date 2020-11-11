@@ -1,16 +1,11 @@
 <?php
-    require_once "config.php";
+    require_once "DB.php";
+    
+    $db = new DB();
+    $index = $db->index();
 
-    $statement = $pdo->prepare("SELECT * FROM todo");
-
-    if($statement->execute()) {
-        for($count = 0; $count < $statement->columnCount(); $count++) {
-            $column_meta = $statement->getColumnMeta($count);
-            $column_names[] = $column_meta['name'];
-        }
-
-        $datum = $statement->fetchall(PDO::FETCH_CLASS);
-    }
+    $column_names = $index[0];
+    $datum = $index[1];
 ?>
 <!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

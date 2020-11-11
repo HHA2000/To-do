@@ -1,14 +1,9 @@
 <?php
-    require_once "config.php";
+    require_once "DB.php";
 
-    $id = $_GET["id"];
-
-    $statement = $pdo->prepare("SELECT * FROM todo WHERE id = :id");
-    $statement->bindParam(":id", $id);
-
-    if ($statement->execute()) {
-        $result = $statement->fetch(PDO::FETCH_OBJ);
-        
+    if ($_GET) {
+        $db = new DB();
+        $result = $db->edit($_GET["id"]);
     }
 ?>
 

@@ -1,12 +1,8 @@
 <?php
-    require_once "config.php";
+    require_once "DB.php";
 
-    $id = $_GET['id'];
-
-    $statement = $pdo->prepare("DELETE FROM todo WHERE id = :id");
-    $statement->bindParam(":id", $id);
-
-    if ($statement->execute()) {
-        header("location:index.php");
+    if ($_GET) {
+        $db = new DB();
+        $db->delete($_GET['id']);
     }
 ?>
